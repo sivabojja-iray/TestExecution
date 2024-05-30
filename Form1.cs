@@ -23,7 +23,6 @@ namespace TestExecution
 {
     public partial class Form1 : Form
     {
-        private Dictionary<string, object> viewbag = new Dictionary<string, object>();
         public Form1()
         {
             InitializeComponent();
@@ -80,7 +79,10 @@ namespace TestExecution
                                         {
                                             string attributeValue = node.Attributes["ConditionTagExpression"]?.Value;
 
+                                            /// <summary>
                                             // Extract exclude values
+                                            /// <summary>
+                                            /// 
                                             string excludePattern = @"exclude\[(.*?)\]";
                                             Match excludeMatch = Regex.Match(attributeValue, excludePattern);
                                             List<string> excludeValues = new List<string>();
@@ -92,8 +94,9 @@ namespace TestExecution
                                                                     .Select(m => m.Groups[1].Value)
                                                                     .ToList();
                                             }
-
+                                            /// <summary>
                                             // Extract include values
+                                            /// <summary>
                                             string includePattern = @"include\[(.*?)\]";
                                             Match includeMatch = Regex.Match(attributeValue, includePattern);
                                             List<string> includeValues = new List<string>();
@@ -111,7 +114,9 @@ namespace TestExecution
 
                                             if (status == "Exclude")
                                             {
+                                                /// <summary>
                                                 // Add tag to exclude list if not present
+                                                /// <summary>
                                                 if (!excludeValues.Contains(tag))
                                                 {
                                                     if (conditionTagExpression.Contains("exclude["))
@@ -127,8 +132,9 @@ namespace TestExecution
                                                         conditionTagExpression = conditionTagExpression.Substring(0, excludeStartIndex) + existingExcludes + conditionTagExpression.Substring(excludeEndIndex);
                                                     }
                                                 }
-
+                                                /// <summary>
                                                 // Remove tag from include list if present
+                                                /// <summary>
                                                 if (includeValues.Contains(tag))
                                                 {
                                                     if (conditionTagExpression.Contains("include["))
@@ -146,7 +152,9 @@ namespace TestExecution
                                             }
                                             else if (status == "Include")
                                             {
+                                                /// <summary>
                                                 // Remove tag from exclude list if present
+                                                /// <summary>
                                                 if (excludeValues.Contains(tag))
                                                 {
                                                     if (conditionTagExpression.Contains("exclude["))
@@ -161,7 +169,9 @@ namespace TestExecution
                                                         conditionTagExpression = conditionTagExpression.Substring(0, excludeStartIndex) + newExcludeSection + conditionTagExpression.Substring(excludeEndIndex);
                                                     }
                                                 }
+                                                /// <summary>
                                                 // Add tag to include list if not present
+                                                /// <summary>
                                                 if (!includeValues.Contains(tag))
                                                 {
                                                     if (conditionTagExpression.Contains("include["))
@@ -175,6 +185,43 @@ namespace TestExecution
                                                         }
                                                         existingIncludes += $"\"{tag}\"";
                                                         conditionTagExpression = conditionTagExpression.Substring(0, includeStartIndex) + existingIncludes + conditionTagExpression.Substring(includeEndIndex);
+                                                    }
+                                                }
+                                            }
+                                            else if (status == "Not Set")
+                                            {
+                                                /// <summary>
+                                                // Remove tag from exclude list if present
+                                                /// <summary>
+                                                if (excludeValues.Contains(tag))
+                                                {
+                                                    if (conditionTagExpression.Contains("exclude["))
+                                                    {
+                                                        int excludeStartIndex = conditionTagExpression.IndexOf("exclude[") + "exclude[".Length;
+                                                        int excludeEndIndex = conditionTagExpression.IndexOf("]", excludeStartIndex);
+                                                        string excludeSection = conditionTagExpression.Substring(excludeStartIndex, excludeEndIndex - excludeStartIndex);
+                                                        var excludeItems = excludeSection.Split(new[] { " or " }, StringSplitOptions.None)
+                                                                                        .Where(x => x.Trim() != $"\"{tag}\"")
+                                                                                        .ToList();
+                                                        string newExcludeSection = string.Join(" or ", excludeItems);
+                                                        conditionTagExpression = conditionTagExpression.Substring(0, excludeStartIndex) + newExcludeSection + conditionTagExpression.Substring(excludeEndIndex);
+                                                    }
+                                                }
+                                                /// <summary>
+                                                // Remove tag from include list if present
+                                                /// <summary>
+                                                if (includeValues.Contains(tag))
+                                                {
+                                                    if (conditionTagExpression.Contains("include["))
+                                                    {
+                                                        int includeStartIndex = conditionTagExpression.IndexOf("include[") + "include[".Length;
+                                                        int includeEndIndex = conditionTagExpression.IndexOf("]", includeStartIndex);
+                                                        string includeSection = conditionTagExpression.Substring(includeStartIndex, includeEndIndex - includeStartIndex);
+                                                        var includeItems = includeSection.Split(new[] { " or " }, StringSplitOptions.None)
+                                                                                        .Where(x => x.Trim() != $"\"{tag}\"")
+                                                                                        .ToList();
+                                                        string newIncludeSection = string.Join(" or ", includeItems);
+                                                        conditionTagExpression = conditionTagExpression.Substring(0, includeStartIndex) + newIncludeSection + conditionTagExpression.Substring(includeEndIndex);
                                                     }
                                                 }
                                             }
