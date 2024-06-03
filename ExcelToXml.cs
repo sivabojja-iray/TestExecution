@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -87,14 +88,19 @@ namespace TestExecution
         private void ProcessVariable(string targetValue, string variable, string targetFile)
         {
             XDocument doc = XDocument.Load(targetFile);
-            var xmlAttributes = doc.Descendants("Variable").Select(v => new { Name = v.Attribute("Name")?.Value, Value = v.Value }).ToList();
-            // Compare and update XML with missing attributes from Excel
-            if (!xmlAttributes.Any(x => x.Name == variable) || !xmlAttributes.Any(x => x.Value == targetValue))
+            //var xmlAttributes = doc.Descendants("Variable").Select(v => new { Name = v.Attribute("Name")?.Value, Value = v.Value }).ToList();
+            var xmlAttributeVariables = doc.Descendants("Variable").ToList();
+            // Remove the variable if it exists
+            foreach (var variableElement in xmlAttributeVariables)
             {
-                doc.Root.Element("Variables").Add(new XElement("Variable",
-                        new XAttribute("Name", variable),
-                        targetValue));
+                if (variableElement.Attribute("Name")?.Value == variable)
+                {
+                    variableElement.Remove();
+                }
             }
+            doc.Root.Element("Variables").Add(new XElement("Variable",
+                    new XAttribute("Name", variable),
+                    targetValue));
             doc.Save(targetFile);
         }
 
