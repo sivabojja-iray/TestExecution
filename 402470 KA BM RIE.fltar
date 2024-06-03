@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CatapultTarget Version="2" Comment="Palladium project RIE w battery" Type="PDF" Destinations="" ShowMadCapBacklink="true" GlossaryTermConversion="marked" MasterToc="/Project/TOCs/Palladium TOCs/Palladium RIE and RIE RHI.fltoc" MasterStylesheet="/Content/Resources/Stylesheets/Hassium.css" Medium="print" PatchHeadingLevels="true" ConditionTagExpression="exclude[&quot;AddressLanguages.DE&quot; or &quot;AddressLanguages.CZ&quot; or &quot;AddressLanguages.FI&quot; or &quot;AddressLanguages.FR&quot; or &quot;AddressLanguages.PT&quot; or &quot;AddressLanguages.ES&quot; or &quot;AddressLanguages.IT&quot; or &quot;AddressLanguages.AR&quot; or &quot;AddressLanguages.US&quot; or &quot;AddressLanguages.SV&quot; or &quot;AddressLanguages.NL&quot; or &quot;AddressLanguages.DA&quot; or &quot;AddressLanguages.NO&quot; or &quot;AddressLanguages.BR&quot; or &quot;AddressLanguages.RO&quot; or &quot;AddressLanguages.BG&quot; or &quot;AddressLanguages.EL&quot; or &quot;AddressLanguages.ET&quot; or &quot;AddressLanguages.HU&quot; or &quot;AddressLanguages.HE&quot; or &quot;AddressLanguages.LT&quot; or &quot;AddressLanguages.PL&quot; or &quot;AddressLanguages.RU&quot; or &quot;AddressLanguages.SL&quot; or &quot;AddressLanguages.HR&quot; or &quot;AddressLanguages.MK&quot; or &quot;AddressLanguages.SR&quot; or &quot;AddressLanguages.TR&quot; or &quot;AddressLanguages.UK&quot; or &quot;AddressLanguages.SQ&quot; or &quot;AddressLanguages.FR_CA&quot; or &quot;AddressLanguages.BOJJA&quot;] include[&quot;AddressLanguages.DE&quot; or &quot;AddressLanguages.CZ&quot; or &quot;AddressLanguages.FR&quot; or &quot;AddressLanguages.PT&quot; or &quot;AddressLanguages.ES&quot; or &quot;AddressLanguages.IT&quot;]" OutputFile="[%=Basic_variables.DocumentNumber%][%=Basic_variables.Language_ID%]-[%=GNSystem.Releasedate%]-Rev.[%=Basic_variables.Revision%]" GetLatestBeforeCompile="false" MasterStylesheetOverride="false" InjectBookHeadings="true" TargetLanguage="en-gb">
+  <Variables>
+    <Variable Name="Basic_variables/BrandName">ReSound</Variable>
+    <Variable Name="Basic_variables/URL_main">resound.com</Variable>
+    <Variable Name="Basic_variables/BrandNameLong">GN ReSound A/S</Variable>
+    <Variable Name="Basic_variables/DocumentNumber">402389</Variable>
+    <Variable Name="Basic_variables/Language_ID">000GB</Variable>
+    <Variable Name="Basic_variables/Revision">A</Variable>
+    <Variable Name="Basic_variables/CompanyNameLong for BackPages and CE mark">GN Hearing A/S</Variable>
+    <Variable Name="Basic_variables/CurrentYearStatic">2021</Variable>
+    <Variable Name="Basic_variables/ProductName">[ProductName]</Variable>
+  </Variables>
+</CatapultTarget>
