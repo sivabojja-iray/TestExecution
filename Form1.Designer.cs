@@ -1,6 +1,6 @@
 ﻿namespace TestExecution
 {
-    partial class Form1
+    partial class TestExecutionForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,13 +31,15 @@
             this.buttonUpdateExcel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonUpdateXml = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonUpdateExcel
             // 
             this.buttonUpdateExcel.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.buttonUpdateExcel.Location = new System.Drawing.Point(13, 246);
-            this.buttonUpdateExcel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonUpdateExcel.Margin = new System.Windows.Forms.Padding(4);
             this.buttonUpdateExcel.Name = "buttonUpdateExcel";
             this.buttonUpdateExcel.Size = new System.Drawing.Size(180, 62);
             this.buttonUpdateExcel.TabIndex = 0;
@@ -68,19 +70,39 @@
             this.buttonUpdateXml.Text = "Update Xml";
             this.buttonUpdateXml.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(14, 141);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(464, 23);
+            this.progressBar1.TabIndex = 3;
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.ForeColor = System.Drawing.Color.ForestGreen;
+            this.lblStatus.Location = new System.Drawing.Point(167, 177);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(144, 20);
+            this.lblStatus.TabIndex = 4;
+            this.lblStatus.Text = "Processing...0%";
+            // 
+            // TestExecutionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Info;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(490, 364);
+            this.Controls.Add(this.lblStatus);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.buttonUpdateXml);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonUpdateExcel);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Name = "Form1";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "TestExecutionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TestExecutionForm";
             this.ResumeLayout(false);
@@ -93,6 +115,8 @@
         private System.Windows.Forms.Button buttonUpdateExcel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonUpdateXml;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label lblStatus;
     }
 }
 

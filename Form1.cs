@@ -1,23 +1,43 @@
 ﻿using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using LicenseContext = OfficeOpenXml.LicenseContext;
 
 namespace TestExecution
 {
-    public partial class Form1 : Form
+    public partial class TestExecutionForm : Form
     {
-        public Form1()
+        public TestExecutionForm()
         {
             InitializeComponent();
+            progressBar1.Visible = false;
+            lblStatus.Visible = false;
         }
-        private void button1_Click(object sender, EventArgs e)
+        private Task ProcessData(List<string> list,IProgress<ProgessReport> progress)
+        {
+            int index = 1;
+            int totalProcess = list.Count;
+            var progressReport = new ProgessReport();
+            return Task.Run(() =>
+            {
+                for(int i = 0; i < totalProcess; i++)
+                {
+                    progressReport.PercentComplete = index++ * 100 / totalProcess;
+                    progress.Report(progressReport);
+                    Thread.Sleep(10);
+                }
+            });
+        }
+        private async void button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Select File to Upload";
@@ -29,8 +49,28 @@ namespace TestExecution
                 ExcelToXml excelToXml = new ExcelToXml();
                 excelToXml.ReadExcel(fileName);
             }
-            //ReadExcel(openFileDialog.FileName);
-        }     
+            buttonUpdateExcel.Enabled = false;
+            buttonUpdateXml.Enabled = false;
+            progressBar1.Visible = true;
+            lblStatus.Visible = true;
+            List<string> list = new List<string>();
+            for (int i = 0; i < 1000; i++)
+                list.Add(i.ToString());
+            lblStatus.Text = "Working...";
+            var progress = new Progress<ProgessReport>();
+            progress.ProgressChanged += (o, report) =>
+            {
+                lblStatus.Text = string.Format("Processing...{0}%", report.PercentComplete);
+                progressBar1.Value = report.PercentComplete;
+                progressBar1.Update();
+            };
+            await ProcessData(list, progress);
+            MessageBox.Show("Excel data converted to XML successfully!");
+            progressBar1.Visible = false;
+            buttonUpdateExcel.Enabled = true;
+            buttonUpdateXml.Enabled = true;
+            lblStatus.Visible = false;         
+        }
         //private void ReadExcel(string filePath)
         //{
         //    try
